@@ -2,7 +2,8 @@ const express = require ('express')
 const app = express();
 const bodyParser = require('body-parser')
 const connection = require('./database/database.js')
-
+const categoriesController = require('./categories/categoriesController.js')
+const articlesController = require('./articles/articlesController.js')
 //VIEW ENGINE
 app.set('view engine', 'ejs');
 //ARQUIVOS ESTÁTICOS
@@ -20,6 +21,9 @@ connection.authenticate().then(() => {
 
 })
 
+
+app.use('/', categoriesController)
+app.use('/', articlesController)
 
 app.get('/', (req, res) => {
     res.render('index')
